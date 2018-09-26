@@ -387,10 +387,16 @@ class Product {
 		foreach($texts as $text){
 
 			if( $text->getType() == OtherText::TYPE_MAIN_DESCRIPTION )
-				$description = $text->getValue();
+				$description = [
+					'text' => $text->getValue(),
+					'format' => $text->getFormat(),
+				];
 
 			elseif( !$description && $strict !== true )
-				$description = $text->getValue();
+				$description = [
+					'text' => $text->getValue(),
+					'format' => $text->getFormat(),
+				];
 		}
 
 		return $description;
@@ -410,6 +416,7 @@ class Product {
 			if( $text->getType() == OtherText::TYPE_REVIEW_QUOTE )
 				$quotes[] = [
 					'text' => $text->getValue(),
+					'format' => $text->getFormat(),
 					'author' => $text->getAuthor()
 				];
 		}
@@ -429,8 +436,11 @@ class Product {
 
 		foreach($texts as $text){
 			if( $text->getType() == OtherText::TYPE_BIOGRAPHICAL_NOTE )
-				$notes[] = $text->getValue();
-		}
+				$notes[] = [
+					'text' => $text->getValue(),
+					'format' => $text->getFormat(),
+				];
+			}
 
 		return $notes;
 	}
