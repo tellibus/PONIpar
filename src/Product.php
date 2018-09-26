@@ -5,6 +5,7 @@ namespace PONIpar;
 use PONIpar\ProductSubitem\Subject;
 use PONIpar\Exceptions\XMLException;
 use PONIpar\ProductSubitem\OtherText;
+use PONIpar\ProductSubitem\Series;
 use PONIpar\Exceptions\ElementNotFoundException;
 
 /*
@@ -285,6 +286,41 @@ class Product {
 			return $this->get('DescriptiveDetail/TitleDetail', 'Title');
 		else
 			return $this->get('Title');
+	}
+
+	/**
+	* Is Part of Series?
+	*
+	 * Retrieve whether the product is part of a series.
+	*/
+	public function isNotPartOfSeries() {
+		if ($this->version >= '3.0') {
+			// unknown implementation
+		} else {
+			return $this->get('NoSeries');
+		}
+	}
+
+	/**
+	* Get Series
+	*
+	* @return array of Series objects
+	*/
+	public function getSeries() {
+		if ($this->isNotPartOfSeries()) {
+			return null;
+		} else {
+			if ($this->version >= '3.0') {
+				// unknown implementation
+			} else {
+				$series = $this->get('Series')[0];
+
+				return [
+					'titleOfSeries' => $series->getTitleOfSeries(),
+					'numberWithinSeries' => $series->getNumberWithinSeries(),
+				];
+			}
+		}
 	}
 
 	public function getPublisher()
