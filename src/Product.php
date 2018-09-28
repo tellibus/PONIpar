@@ -488,6 +488,12 @@ class Product {
 			return $this->get('Prize');
 	}
 
+	public function getPrizesMinimalData() {
+		return array_map(function($award) {
+			return $award->getMinimalData();
+		}, $this->getPrizes());
+	}
+
 	public function getPrizesData(){
 		return array_map(function($award){ return $award->getData(); }, $this->getPrizes());
 	}
