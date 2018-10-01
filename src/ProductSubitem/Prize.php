@@ -104,7 +104,7 @@ class Prize extends Subitem {
 			return $this->getCodeName().$this->name.($this->year?', '.$this->year:'');
 	}
 
-	public function getMinimaData() {
+	public function getMinimalData() {
 		return [
 			'name' => $this->name,
 			'year' => $this->year,
