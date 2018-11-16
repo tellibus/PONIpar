@@ -481,6 +481,28 @@ class Product {
 		return $notes;
 	}
 
+	/**
+	* Get Bio Notes
+	*
+	* @return array
+	*/
+	public function getExcerpt() {
+
+		$texts = $this->getTexts();
+		$excerpt = null;
+
+		foreach ($texts as $text) {
+			if ($text->getType() == OtherText::TYPE_EXCERPT) {
+				$excerpt = [
+					'text' => $text->getValue(),
+					'format' => $text->getFormat(),
+				];
+			}
+		}
+
+		return $excerpt;
+	}
+
 	public function getPrizes(){
 		if( $this->version >= '3.0' )
 			return $this->get('CollateralDetail/Prize', 'Prize');
