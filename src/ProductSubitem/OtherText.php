@@ -54,7 +54,12 @@ class OtherText extends Subitem {
 		if( !$this->type )
 			try {$this->type = $this->_getSingleChildElementText('TextType');} catch(\Exception $e) { }
 
-		try {$this->format = $this->_getSingleChildElementText('TextFormat');} catch(\Exception $e) { }
+		try {
+			$this->format = $this->_getSingleChildElementText('TextFormat');
+		} catch(\Exception $e) {
+			$this->format = $this->_getAttribute('textformat');
+		} catch(\Exception $e) { }
+
 		try {$this->value = $this->_getSingleChildElementText('Text');} catch(\Exception $e) { }
 		try {$this->author = $this->_getSingleChildElementText('TextAuthor');} catch(\Exception $e) { }
 

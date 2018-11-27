@@ -55,6 +55,27 @@ abstract class Subitem {
 	}
 
 	/**
+	 * Retrieve an element’s attribute with the specified name.
+	 *
+	 * @param  string     $name The name of the attribute to search.
+	 * @return string     The value of the attribute.
+	 */
+	protected function _getAttribute($name) {
+		$res = $this->xpath->query("//*[@$name]");
+
+		if ($res === false) {
+			throw new InternalException('XPath query returned false');
+		}
+
+		$length = $res->length;
+		if ($length == 0) {
+			throw new ElementNotFoundException("no element with attribute '$name' was found");
+		}
+
+		return $res->item(0)->getAttribute($name);
+	}
+
+	/**
 	 * Retrieve a single child element with the specified name. If there is more
 	 * than one element by that name, throw an exception.
 	 *
