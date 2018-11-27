@@ -453,7 +453,8 @@ class Product {
 				$quotes[] = [
 					'text' => $text->getValue(),
 					'format' => $text->getFormat(),
-					'author' => $text->getAuthor()
+					'author' => $text->getAuthor(),
+					'sourceTitle' => $text->getSourceTitle()
 				];
 		}
 

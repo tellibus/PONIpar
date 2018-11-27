@@ -39,6 +39,7 @@ class OtherText extends Subitem {
 	protected $format = null;
 	protected $value = null;
 	protected $author = null;
+	protected $sourceTitle = null;
 
 	/**
 	 * Create a new OtherText.
@@ -62,6 +63,7 @@ class OtherText extends Subitem {
 
 		try {$this->value = $this->_getSingleChildElementText('Text');} catch(\Exception $e) { }
 		try {$this->author = $this->_getSingleChildElementText('TextAuthor');} catch(\Exception $e) { }
+		try {$this->sourceTitle = $this->_getSingleChildElementText('TextSourceTitle');} catch(\Exception $e) { }
 
 		$this->cleanValue();
 
@@ -103,6 +105,15 @@ class OtherText extends Subitem {
 	 */
 	public function getAuthor() {
 		return $this->author;
+	}
+
+	/**
+	 * Retrieve the actual value of this text.
+	 *
+	 * @return string The contents of <TextSourceTitle>.
+	 */
+	public function getSourceTitle() {
+		return $this->sourceTitle;
 	}
 
 	private function cleanValue(){

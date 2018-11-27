@@ -404,6 +404,7 @@ class XMLHandler {
 		'territory' => 'Territory',
 		'd104' => 'Text',
 		'd107' => 'TextAuthor',
+		'd108' => 'TextSourceTitle',
 		'textcontent' => 'TextContent',
 		'textitem' => 'TextItem',
 		'b285' => 'TextItemIDType',
