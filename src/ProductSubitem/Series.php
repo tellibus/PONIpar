@@ -53,7 +53,7 @@ class Series extends Subitem
 	/**
 	 * Retrieve the title of the series.
 	 *
-	 * @return string The contents of <TextAuthor>.
+	 * @return string The contents of <TitleOfSeries>.
 	 */
 	public function getTitleOfSeries()
 	{
@@ -63,7 +63,7 @@ class Series extends Subitem
 	/**
 	 * Retrieve the number within the series.
 	 *
-	 * @return string The contents of <TextAuthor>.
+	 * @return string The contents of <NumberWithinSeries>.
 	 */
 	public function getNumberWithinSeries()
 	{
