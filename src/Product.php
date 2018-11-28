@@ -620,10 +620,7 @@ class Product {
 			foreach($subjects as $subject){
 				if( $subject->getScheme() == Subject::SCHEME_BISAC_SUBJECT_HEADING ){
 					if( $subject->isMainSubject() )
-						return [
-							'code' => $subject->getValue(),
-							'label' => $subject->getText()
-						];
+						return $subject->getValue();
 				}
 			}
 		}else{
@@ -647,10 +644,7 @@ class Product {
 		foreach($subjects as $subject){
 			if( $subject->getScheme() == Subject::SCHEME_BISAC_SUBJECT_HEADING ){
 				if( !$subject->isMainSubject() )
-					$others[] = [
-						'code' => $subject->getValue(),
-						'label' => $subject->getText()
-					];
+					$others[] = $subject->getValue();
 			}
 		}
 
