@@ -4,6 +4,7 @@ namespace PONIpar;
 
 use PONIpar\ProductSubitem\Subject;
 use PONIpar\Exceptions\XMLException;
+use PONIpar\ProductSubitem\Language;
 use PONIpar\ProductSubitem\OtherText;
 use PONIpar\ProductSubitem\Series;
 use PONIpar\Exceptions\ElementNotFoundException;
@@ -268,11 +269,39 @@ class Product {
 		}
 	}
 
-	public function getLanguage()
+	/**
+	* Get Languages
+	*
+	* @return array of Language objects
+	*/
+	public function getLanguages()
 	{
 		if($this->version >= '3.0') {
-			return $this->get('DescriptiveDetail/Language', 'Language');
+			return $this->get('DescriptiveDetail/Language', 'Language')[0];
+		} else {
+			return $this->get('Language');
 		}
+	}
+
+	/**
+	* Get Language of Text
+	*
+	* @return string Language code
+	*/
+	public function getLanguageOfText()
+	{
+		if ($this->version >= '3.0') {
+			// unknown implementation
+		} else {
+			$languages = $this->getLanguages();
+
+			foreach ($languages as $language) {
+				if ($language->getRole() === Language::ROLE_TEXT) {
+					return $language->getCode();
+				}
+			}
+		}
+
 		return null;
 	}
 
