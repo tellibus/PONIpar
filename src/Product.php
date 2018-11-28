@@ -466,7 +466,7 @@ class Product {
 	*
 	* @return array
 	*/
-	public function getBiograhpicalNotes(){
+	public function getBiographicalNotes(){
 
 		$texts = $this->getTexts();
 		$notes = [];
