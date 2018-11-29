@@ -19,7 +19,7 @@ use PONIpar\ProductSubitem\Subitem;
 class Audience extends Subitem
 {
 	// List 29
-	const ONIX_AUDIENCE_CODES = '01';
+	const ONIX_AUDIENCE_CODE = '01';
 
 	/**
 	 * Text data

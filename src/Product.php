@@ -329,7 +329,9 @@ class Product {
 				$codes = $this->get('Audience');
 
 				foreach ($codes as $code) {
-					$audienceCodes[] = $code->getValue();
+					if ($code->getType() === Audience::ONIX_AUDIENCE_CODE) {
+						$audienceCodes[] = $code->getValue();
+					}
 				}
 			}
 
