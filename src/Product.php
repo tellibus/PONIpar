@@ -8,6 +8,7 @@ use PONIpar\ProductSubitem\Language;
 use PONIpar\ProductSubitem\Audience;
 use PONIpar\ProductSubitem\AudienceRange;
 use PONIpar\ProductSubitem\OtherText;
+use PONIpar\ProductSubitem\MediaFile;
 use PONIpar\ProductSubitem\Series;
 use PONIpar\Exceptions\ElementNotFoundException;
 
@@ -380,6 +381,27 @@ class Product {
 			}
 
 			return $audienceRanges;
+		}
+	}
+
+	/**
+	* Get Cover image link & date
+	*
+	* @return object of Cover Image 
+	*/
+	public function getCoverImage()
+	{
+		if ($this->version >= '3.0') {
+			// implementation unknown
+		} else {
+			$mediaFile = $this->get('MediaFile');
+
+			if (count($mediaFile)) {
+				return [
+					'url' => $mediaFile[0]->getUrl(),
+					'date' => $mediaFile[0]->getDate(),
+				];
+			}
 		}
 	}
 

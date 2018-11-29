@@ -440,6 +440,12 @@ class XMLHandler {
 		'b201' => 'WorkIDType',
 		'x454' => 'WorkRelationCode',
 		'b020' => 'YearOfAnnual',
+		'mediafile' => 'MediaFile',
+		'f114' => 'MediaFileTypeCode',
+		'f115' => 'MediaFileFormatCode',
+		'f116' => 'MediaFileLinkTypeCode',
+		'f117' => 'MediaFileLink',
+		'f373' => 'MediaFileDate',
 
 		// make sure these are captilized
 		'title' => 'Title',
