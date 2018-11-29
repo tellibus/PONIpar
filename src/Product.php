@@ -5,6 +5,7 @@ namespace PONIpar;
 use PONIpar\ProductSubitem\Subject;
 use PONIpar\Exceptions\XMLException;
 use PONIpar\ProductSubitem\Language;
+use PONIpar\ProductSubitem\Audience;
 use PONIpar\ProductSubitem\OtherText;
 use PONIpar\ProductSubitem\Series;
 use PONIpar\Exceptions\ElementNotFoundException;
@@ -317,9 +318,19 @@ class Product {
 		} else {
 			$audienceCodes = [];
 			$codes = $this->get('AudienceCode');
+			
+			if (count($codes)) {
+				// With 'AudienceCode' tags
+				foreach ($codes as $code) {
+					$audienceCodes[] = $code->nodeValue;
+				}
+			} else {
+				// With 'Audience' short tags
+				$codes = $this->get('Audience');
 
-			foreach ($codes as $code) {
-				$audienceCodes[] = $code->nodeValue;
+				foreach ($codes as $code) {
+					$audienceCodes[] = $code->getValue();
+				}
 			}
 
 			return $audienceCodes;
