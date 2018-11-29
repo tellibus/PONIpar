@@ -306,6 +306,27 @@ class Product {
 	}
 
 	/**
+	* Get Audience Codes
+	*
+	* @return array of Audience Codes
+	*/
+	public function getAudienceCodes()
+	{
+		if ($this->version >= '3.0') {
+			// unknown implementation
+		} else {
+			$audienceCodes = [];
+			$codes = $this->get('AudienceCode');
+
+			foreach ($codes as $code) {
+				$audienceCodes[] = $code->nodeValue;
+			}
+
+			return $audienceCodes;
+		}
+	}
+
+	/**
 	* Get Titles
 	*
 	* @return array of Title objects
