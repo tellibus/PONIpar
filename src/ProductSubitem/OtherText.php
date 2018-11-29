@@ -25,7 +25,9 @@ class OtherText extends Subitem {
 	const TYPE_SHORT_DESCRIPTION = "02";
 	const TYPE_LONG_DESCRIPTION = "03";
 	const TYPE_REVIEW_QUOTE = "08";
+	const TYPE_PROMOTIONAL_HEADLINE = "08";
 	const TYPE_BIOGRAPHICAL_NOTE = "13";
+	const TYPE_BACK_COVER_COPY = "18";
 	const TYPE_EXCERPT = "23";
 
 	// List 34

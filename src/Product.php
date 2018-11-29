@@ -569,6 +569,29 @@ class Product {
 	}
 
 	/**
+	* Get Promotional Headline
+	*
+	* @return array
+	*/
+	public function getPromotionalHeadline()
+	{
+
+		$texts = $this->getTexts();
+		$promotionalHeadline = null;
+
+		foreach ($texts as $text) {
+			if ($text->getType() == OtherText::TYPE_PROMOTIONAL_HEADLINE) {
+				$promotionalHeadline = [
+					'text' => $text->getValue(),
+					'format' => $text->getFormat(),
+				];
+			}
+		}
+
+		return $promotionalHeadline;
+	}
+
+	/**
 	* Get Bio Notes
 	*
 	* @return array
@@ -590,11 +613,35 @@ class Product {
 	}
 
 	/**
-	* Get Bio Notes
+	* Get Back Cover Copy
 	*
 	* @return array
 	*/
-	public function getExcerpt() {
+	public function getBackCoverCopy()
+	{
+
+		$texts = $this->getTexts();
+		$backCoverCopy = null;
+
+		foreach ($texts as $text) {
+			if ($text->getType() == OtherText::TYPE_BACK_COVER_COPY) {
+				$backCoverCopy = [
+					'text' => $text->getValue(),
+					'format' => $text->getFormat(),
+				];
+			}
+		}
+
+		return $backCoverCopy;
+	}
+
+	/**
+	* Get Excerpt
+	*
+	* @return array
+	*/
+	public function getExcerpt()
+	{
 
 		$texts = $this->getTexts();
 		$excerpt = null;
