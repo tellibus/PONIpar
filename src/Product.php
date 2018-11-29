@@ -6,6 +6,7 @@ use PONIpar\ProductSubitem\Subject;
 use PONIpar\Exceptions\XMLException;
 use PONIpar\ProductSubitem\Language;
 use PONIpar\ProductSubitem\Audience;
+use PONIpar\ProductSubitem\AudienceRange;
 use PONIpar\ProductSubitem\OtherText;
 use PONIpar\ProductSubitem\Series;
 use PONIpar\Exceptions\ElementNotFoundException;
@@ -336,6 +337,49 @@ class Product {
 			}
 
 			return $audienceCodes;
+		}
+	}
+
+	/**
+	* Get Audience Ranges
+	*
+	* @return array of Audience Ranges
+	*/
+	public function getAudienceRanges()
+	{
+		if ($this->version >= '3.0') {
+			// unknown implementation
+		} else {
+			$audienceRanges = [];
+			$ranges = $this->get('AudienceRange');
+			
+			foreach ($ranges as $range) {
+				$qualifier = null;
+				$qualifierCode = $range->getQualifier();
+
+				switch ($qualifierCode) {
+					case AudienceRange::QUALIFIER_US_SCHOOL_GRADE_RANGE:
+						// not implemented
+
+						break;
+					case AudienceRange::QUALIFIER_INTEREST_AGE_IN_MONTHS:
+						$qualifier = 'VALUES_IN_MONTHS';
+
+						break;
+					case AudienceRange::QUALIFIER_INTEREST_AGE_IN_YEARS:
+						$qualifier = 'VALUES_IN_YEARS';
+				}
+
+				if ($qualifier !== null) {
+					$audienceRanges[] = [
+						'qualifier' => $qualifier,
+						'precisions' => $range->getPrecisions(),
+						'values' => $range->getValues()
+					];
+				}
+			}
+
+			return $audienceRanges;
 		}
 	}
 
