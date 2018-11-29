@@ -126,6 +126,66 @@ abstract class Subitem {
 		return $this->_getSingleChildElement($name, $root)->textContent;
 	}
 
+
+	/**
+	 * Retrieve a collection of child elements with the specified name.
+	 *
+	 * @todo   Make this method short tag compatible.
+	 * @param  string     $name The name of the element to search.
+	 * @param  DOMElement $root The root element under which to search for. If
+	 *                          not specified, the root of this subitem will be
+	 *                          used.
+	 * @return DOMElement A collection of elements by that name. If not found, an
+	 *                    ElementNotFoundException will be thrown.
+	 */
+	protected function _getCollectionOfChildElements($name, \DOMElement $root = null)
+	{
+		// If no root is specified, use the document element of our DOM.
+		if ($root === null) {
+			$root = $this->doc->documentElement;
+		}
+
+		// TODO: The name should be escaped.
+		$res = $this->xpath->query("/*/$name");
+		if ($res === false) {
+			throw new InternalException('XPath query returned false');
+		}
+
+		$length = $res->length;
+		if ($length == 0) {
+			throw new ElementNotFoundException("no $name element found");
+		}
+
+		return $res;
+	}
+
+	/**
+	 * Retrieve the text contents of collection of child elements with the specified
+	 * name.
+	 *
+	 * @param  string     $name The name of the element to search.
+	 * @param  DOMElement $root The root element under which to search for. If
+	 *                          not specified, the root of this subitem will be
+	 *                          used.
+	 * @return array      of text contents of a collection of elements by that name. If not
+	 *                    found, an ElementNotFoundException will be thrown.
+	 */
+	protected function _getCollectionOfChildElementsTexts($name, \DOMElement $root = null)
+	{
+		$array = [];
+
+		$res = $this->_getCollectionOfChildElements($name, $root);
+		$length = $res->length;
+
+		for ($i = 0; $i < $length; $i++) {
+			$array[] = $res->item($i)->textContent;
+		}
+	
+		return $array;
+	}
+
+
+
 	/**
 	 * Create a new Product subitem based on a DOM document or element
 	 * containing only that subitem.
