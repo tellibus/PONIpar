@@ -51,19 +51,19 @@ class Audience extends Subitem
 	}
 
 	/**
-	 * Retrieve the type of this text.
+	 * Retrieve the type of this audience code.
 	 *
-	 * @return string The contents of <TextTypeCode>.
+	 * @return string The contents of <AudienceCodeType>.
 	 */
 	public function getType()
 	{
 		return $this->type;
 	}
 
-	/**
-	 * Retrieve the actual value of this text.
+	/** 
+	 * Retrieve the actual code of the audience.
 	 *
-	 * @return string The contents of <Text>.
+	 * @return string The contents of <AudienceCodeValue>.
 	 */
 	public function getValue()
 	{
