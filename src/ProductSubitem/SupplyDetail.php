@@ -16,6 +16,16 @@ namespace PONIpar\ProductSubitem;
  */
 class SupplyDetail extends Subitem {
 
+    // ONIX List 54
+	const AVAILABILITY_CANCELLED = 'AB';
+	const AVAILABILITY_UNCERTAIN = 'CS';
+	const AVAILABILITY_AVAILABLE = 'IP';
+	const AVAILABILITY_NOT_YET_PUBLISHED = 'NP';
+	const AVAILABILITY_OUT_OF_STOCK_INDEFINITELY = 'OI';
+	const AVAILABILITY_OUT_OF_PRINT = 'OP';
+	const AVAILABILITY_REPLACED_BY_NEW_EDITION = 'OR';
+	const AVAILABILITY_PUBLICATION_POSTPONED_INDEFINITELY = 'PP';
+
 	protected $availability_codes = array(
 		'IP' => 'Available',
 		'NP' => 'Not yet available',
@@ -99,6 +109,15 @@ class SupplyDetail extends Subitem {
 		return $default;
 	}
 
+	/**
+	 * Retrieve the availability code of this supply detail
+	 *
+	 * @return string The contents of <AvailabilityCode>.
+	 */
+	public function getAvailabilityCode()
+	{
+		return $this->availability_code;
+	}
 
 	/**
 	 * Retrieve the availability of this supply detail
