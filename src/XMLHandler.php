@@ -195,6 +195,7 @@ class XMLHandler {
 		'j407' => 'MarketPublishingStatus',
 		'x406' => 'MarketPublishingStatusNote',
 		'measure' => 'Measure',
+		'c093' => 'MeasureTypeCode',
 		'c094' => 'Measurement',
 		'x315' => 'MeasureType',
 		'c095' => 'MeasureUnitCode',

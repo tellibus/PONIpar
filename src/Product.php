@@ -9,6 +9,7 @@ use PONIpar\ProductSubitem\Audience;
 use PONIpar\ProductSubitem\AudienceRange;
 use PONIpar\ProductSubitem\OtherText;
 use PONIpar\ProductSubitem\MediaFile;
+use PONIpar\ProductSubitem\Measure;
 use PONIpar\ProductSubitem\Series;
 use PONIpar\Exceptions\ElementNotFoundException;
 
@@ -402,6 +403,71 @@ class Product {
 					'date' => $mediaFile[0]->getDate(),
 				];
 			}
+		}
+	}
+
+	/**
+	* Get Measures
+	*
+	* @return array of Measure objects
+	*/
+	public function getMeasures()
+	{
+		if ($this->version >= '3.0') {
+			// implementation unknown
+		} else {
+			$measures = null;
+			$measureNodes = $this->get('Measure');
+
+			if (count($measureNodes)) {
+				$height = null;
+				$width = null;
+				$thickness = null;
+				$weight = null;
+				
+				foreach ($measureNodes as $measureNode) {
+					$measureType = $measureNode->getType();
+					$measureUnit = $measureNode->getUnit();
+					$measureValue = $measureNode->getValue();
+					switch ($measureType) {
+						case Measure::TYPE_HEIGHT:
+							$height = [
+								'value' => $measureValue,
+								'unit' => $measureUnit,
+							];
+
+							break;
+						case Measure::TYPE_WIDTH:
+							$width = [
+								'value' => $measureValue,
+								'unit' => $measureUnit,
+							];
+
+							break;
+						case Measure::TYPE_THICKNESS:
+							$thickness = [
+								'value' => $measureValue,
+								'unit' => $measureUnit,
+							];
+
+							break;
+						case Measure::TYPE_WEIGHT:
+							$weight = [
+								'value' => $measureValue,
+								'unit' => $measureUnit,
+							];
+					}
+				}
+
+				$measures = [
+					'height' => $height,
+					'width' => $width,
+					'thickness' => $thickness,
+					'weight' => $weight,
+				];
+			}
+
+			return $measures;
 		}
 	}
 
