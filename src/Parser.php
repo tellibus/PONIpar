@@ -192,12 +192,62 @@ class Parser {
 	}
 
 	/**
+	 * Get the Sender company name of ONIX being parsed
+	 *
+	 * @return string
+	 */
+	public function getSenderCompanyName()
+	{
+		return $this->xmlhandler->getSenderCompanyName();
+	}
+
+	/**
+	 * Get the Sender contact of ONIX being parsed
+	 *
+	 * @return string
+	 */
+	public function getSenderContact()
+	{
+		return $this->xmlhandler->getSenderContact();
+	}
+
+	/**
+	 * Get the Sender contact email of ONIX being parsed
+	 *
+	 * @return string
+	 */
+	public function getSenderContactEmail()
+	{
+		return $this->xmlhandler->getSenderContactEmail();
+	}
+
+	/**
+	 * Get the Message creation date/time (string format)
+	 *
+	 * @return string
+	 */
+	public function getRawSentDate()
+	{
+		return $this->xmlhandler->getRawSentDate();
+	}
+
+	/**
 	 * Get Sent Date of ONIX being parsed
 	 *
 	 * @return \DateTime
 	 */
 	public function getSentDate(){
 		return $this->xmlhandler->getSentDate();
+	}
+
+	/**
+	 * Get the Default language of text of ONIX being parsed
+	 *
+	 * @return string
+	 */
+	public function getDdefaultLanguageOfText()
+	{
+		return $this->xmlhandler->getDdefaultLanguageOfText();
 	}
 
 }

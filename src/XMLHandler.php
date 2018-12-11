@@ -447,8 +447,12 @@ class XMLHandler {
 		'f116' => 'MediaFileLinkTypeCode',
 		'f117' => 'MediaFileLink',
 		'f373' => 'MediaFileDate',
+		'm174' => 'FromCompany',
+		'm175' => 'FromPerson',
+		'm283' => 'FromEmail',
+		'm182' => 'SentDate',
 
-		// make sure these are captilized
+		// make sure these are capitalized
 		'title' => 'Title',
 		'series' => 'Series',
 		'othertext' => 'OtherText'
@@ -460,9 +464,34 @@ class XMLHandler {
 	protected $version = null;
 
 	/**
+	 * The Sender company name
+	 */
+	protected $fromCompany = null;
+
+	/**
+	 * The Sender contact
+	 */
+	protected $fromPerson = null;
+
+	/**
+	 * The Sender contact email address
+	 */
+	protected $fromEmail = null;
+
+	/**
+	 * The Message creation date/time (string format)
+	 */
+	protected $rawSentDate = null;
+
+	/**
 	 * The date the ONIX was sent (int Unix timestamp)
 	 */
 	protected $sentDate = null;
+
+	/**
+	 * The Default language of text
+	 */
+	protected $defaultLanguageOfText = null;
 
 	/**
 	 * Whether the document that’s being parsed uses short tags or not.
@@ -629,11 +658,34 @@ class XMLHandler {
 	 * @return null
 	 */
 	protected function handleText($parser, $text) {
-		// if currently on the <m182> (SentDate) tag, save the value
-		if($this->openelements &&
-				$this->openelements[count($this->openelements)-1] == 'SentDate' ||
-				$this->openelements[count($this->openelements)-1] == 'SentDateTime'){
-			$this->sentDate = $text ? strtotime($text) : null;
+		if ($this->openelements && count($this->openelements)) {
+			$current = $this->getCurrentElementName(end($this->openelements));
+
+			// if currently on the <m174> (FromCompany) tag, save the value
+			if ($current === 'FromCompany') {
+				$this->fromCompany = $text ? $text : null;
+			}
+
+			// if currently on the <m175> (FromPerson) tag, save the value
+			if ($current === 'FromPerson') {
+				$this->fromPerson = $text ? $text : null;
+			}
+
+			// if currently on the <m283> (FromEmail) tag, save the value
+			if ($current === 'FromEmail') {
+				$this->fromEmail = $text ? $text : null;
+			}
+			
+			// if currently on the <m182> (SentDate) tag, save the value
+			if ($current === 'SentDate' || $current === 'SentDateTime') {
+				$this->rawSentDate = $text ? $text : null;
+				$this->sentDate = $text ? strtotime($text) : null;
+			}
+
+			// if currently on the <m184> (DefaultLanguageOfText) tag, save the value
+			if ($current === 'DefaultLanguageOfText') {
+				$this->defaultLanguageOfText = $text ? $text : null;
+			}
 		}
 
 		// If we’re in a product, create and append a text node.
@@ -789,12 +841,62 @@ class XMLHandler {
 	}
 
 	/**
+	 * Get the Sender company name of ONIX being parsed
+	 *
+	 * @return string
+	 */
+	public function getSenderCompanyName()
+	{
+		return $this->fromCompany;
+	}
+
+	/**
+	 * Get the Sender contact of ONIX being parsed
+	 *
+	 * @return string
+	 */
+	public function getSenderContact()
+	{
+		return $this->fromPerson;
+	}
+
+	/**
+	 * Get the Sender contact email of ONIX being parsed
+	 *
+	 * @return string
+	 */
+	public function getSenderContactEmail()
+	{
+		return $this->fromEmail;
+	}
+
+	/**
+	 * Get the Message creation date/time (string format)
+	 *
+	 * @return string
+	 */
+	public function getRawSentDate()
+	{
+		return $this->rawSentDate;
+	}
+
+	/**
 	 * Get Sent Date of ONIX being parsed
 	 *
 	 * @return datetime
 	 */
 	public function getSentDate(){
 		return $this->sentDate;
+	}
+
+	/**
+	 * Get the Default language of text of ONIX being parsed
+	 *
+	 * @return string
+	 */
+	public function getDdefaultLanguageOfText()
+	{
+		return $this->defaultLanguageOfText;
 	}
 
 }
