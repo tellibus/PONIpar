@@ -75,10 +75,10 @@ class Contributor extends Subitem {
 		if( $this->name )
 			return $this->name();
 
-		if( $this->getValue()['PersonName'] )
+		if( isset($this->getValue()['PersonName']) )
 			return $this->name = $this->getValue()['PersonName'];
 
-		if( $this->getValue()['PersonNameInverted'] ){
+		if( isset($this->getValue()['PersonNameInverted']) ){
 			return $this->name = preg_replace("/^(.+), (.+)$/", "$2 $1", $this->getValue()['PersonNameInverted']);
 		}
 
