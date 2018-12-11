@@ -866,7 +866,7 @@ class Product {
 				}
 			}
 		}else{
-			return $this->get('BASICMainSubject')[0]->nodeValue;
+			return count($this->get('BASICMainSubject')) ? $this->get('BASICMainSubject')[0]->nodeValue : null;
 		}
 	}
 
