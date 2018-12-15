@@ -16,7 +16,7 @@ namespace PONIpar\ProductSubitem;
  */
 class SupplyDetail extends Subitem {
 
-    // ONIX List 54
+	// ONIX List 54
 	const AVAILABILITY_CANCELLED = 'AB';
 	const AVAILABILITY_UNCERTAIN = 'CS';
 	const AVAILABILITY_AVAILABLE = 'IP';
@@ -25,6 +25,9 @@ class SupplyDetail extends Subitem {
 	const AVAILABILITY_OUT_OF_PRINT = 'OP';
 	const AVAILABILITY_REPLACED_BY_NEW_EDITION = 'OR';
 	const AVAILABILITY_PUBLICATION_POSTPONED_INDEFINITELY = 'PP';
+
+	// ONIX List 54
+	const PRICE_TYPE_RRP_EXCLUDING_TAX = '01';
 
 	protected $availability_codes = array(
 		'IP' => 'Available',
