@@ -684,18 +684,20 @@ class Product {
 	*
 	* @return array
 	*/
-	public function getBiographicalNotes(){
+	public function getBiographicalNotes()
+	{
 
 		$texts = $this->getTexts();
-		$notes = [];
+		$notes = null;
 
-		foreach($texts as $text){
-			if( $text->getType() == OtherText::TYPE_BIOGRAPHICAL_NOTE )
-				$notes[] = [
+		foreach ($texts as $text) {
+			if ($text->getType() == OtherText::TYPE_BIOGRAPHICAL_NOTE) {
+				$notes = [
 					'text' => $text->getValue(),
 					'format' => $text->getFormat(),
 				];
 			}
+		}
 
 		return $notes;
 	}
