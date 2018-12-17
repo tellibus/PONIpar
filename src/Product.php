@@ -357,24 +357,10 @@ class Product {
 			
 			foreach ($ranges as $range) {
 				$qualifier = null;
-				$qualifierCode = $range->getQualifier();
-
-				switch ($qualifierCode) {
-					case AudienceRange::QUALIFIER_US_SCHOOL_GRADE_RANGE:
-						// not implemented
-
-						break;
-					case AudienceRange::QUALIFIER_INTEREST_AGE_IN_MONTHS:
-						$qualifier = 'VALUES_IN_MONTHS';
-
-						break;
-					case AudienceRange::QUALIFIER_INTEREST_AGE_IN_YEARS:
-						$qualifier = 'VALUES_IN_YEARS';
-				}
 
 				if ($qualifier !== null) {
 					$audienceRanges[] = [
-						'qualifier' => $qualifier,
+						'qualifier' => $range->getQualifier(),
 						'precisions' => $range->getPrecisions(),
 						'values' => $range->getValues()
 					];
