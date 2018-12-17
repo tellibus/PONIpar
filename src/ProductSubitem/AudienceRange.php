@@ -80,25 +80,7 @@ class AudienceRange extends Subitem
 	 */
 	public function getPrecisions()
 	{
-		$precisions = [];
-		$precisionCodes = $this->precisions;
-		
-		foreach ($precisionCodes as $precisionCode) {
-			switch ($precisionCode) {
-				case self::PRECISION_EXACT:
-					$precisions[] = 'PRECISION_EXACT';
-
-					break;
-				case self::PRECISION_FROM:
-					$precisions[] = 'PRECISION_FROM';
-
-					break;
-				case self::PRECISION_TO:
-					$precisions[] = 'PRECISION_TO';
-			}
-		}
-
-		return $precisions;
+		return $this->precisions;
 	}
 
 	/**

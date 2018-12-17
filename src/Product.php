@@ -356,15 +356,11 @@ class Product {
 			$ranges = $this->get('AudienceRange');
 			
 			foreach ($ranges as $range) {
-				$qualifier = null;
-
-				if ($qualifier !== null) {
-					$audienceRanges[] = [
-						'qualifier' => $range->getQualifier(),
-						'precisions' => $range->getPrecisions(),
-						'values' => $range->getValues()
-					];
-				}
+				$audienceRanges[] = [
+					'qualifier' => $range->getQualifier(),
+					'precisions' => $range->getPrecisions(),
+					'values' => $range->getValues()
+				];
 			}
 
 			return $audienceRanges;
