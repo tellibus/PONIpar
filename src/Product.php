@@ -206,7 +206,7 @@ class Product {
 		if( $this->version >= '3.0' )
 			return $this->get('PublishingDetail/PublishingStatus')[0]->nodeValue;
 		else
-			return $this->get('PublishingStatus')[0]->nodeValue;
+			return isset($this->get('PublishingStatus')[0]) ? $this->get('PublishingStatus')[0]->nodeValue : null;
 	}
 
 	public function getPublishingStatusString(){
