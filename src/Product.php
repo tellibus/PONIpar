@@ -895,6 +895,20 @@ class Product {
 		}
 		return "";
 	}
+
+	/**
+	 * Get Number of pages
+	 *
+	 * @return string Returns the number of pages
+	 */
+	public function getNumberOfPages()
+	{
+		if ($this->version >= '3.0') {
+			// Implementation unknown
+		} else {
+			return count($this->get('NumberOfPages')) ? $this->get('NumberOfPages')[0]->nodeValue : null;
+		}
+	}
 }
 
 ?>
