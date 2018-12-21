@@ -18,17 +18,31 @@ use PONIpar\ProductSubitem\Subitem;
  */
 class Contributor extends Subitem {
 
-	// Mapping of constants to types.
+	// Mapping of constants to roles.
 	const ROLE_AUTHOR  		= 'A01';
 	const ROLE_NARRATOR     = 'E03';
 	const ROLE_READBY       = 'E07';
 	const ROLE_PERFORMER    = 'E99';
 
 	/**
-	 * The type of this product identifier.
+	 * The role of this contributor.
 	 */
 	protected $role = null;
+
+	/**
+	 * The sequence number of this contributor.
+	 */
+	protected $sequenceNumber = null;
+
+	/**
+	 * The optional name of this contributor.
+	 */
 	protected $name = null;
+
+	/**
+	 * The optional corporate name of this contributor.
+	 */
+	protected $corporateName = null;
 
 	/**
 	 * The identifier’s value.
@@ -44,7 +58,7 @@ class Contributor extends Subitem {
 
 		parent::__construct($in);
 
-		// Retrieve and check the type.
+		// Retrieve and check the role.
 		$this->role = $this->_getSingleChildElementText('ContributorRole');
 
 		// Get the value.
@@ -57,6 +71,7 @@ class Contributor extends Subitem {
 		try {$this->value['SequenceNumber'] = $this->_getSingleChildElementText('SequenceNumber');} catch(\Exception $e) { }
 		try {$this->value['NamesBeforeKey'] = $this->_getSingleChildElementText('NamesBeforeKey');} catch(\Exception $e) { }
 		try {$this->value['KeyNames'] = $this->_getSingleChildElementText('KeyNames');} catch(\Exception $e) { }
+		try {$this->value['CorporateName'] = $this->_getSingleChildElementText('CorporateName');} catch(\Exception $e) { }
 		try {$this->value['Bio'] = $this->_getSingleChildElementText('BiographicalNote');} catch(\Exception $e) { }
 
 		if(isset($this->value['Bio']))
@@ -86,12 +101,46 @@ class Contributor extends Subitem {
 	}
 
 	/**
-	 * Retrieve the type of this identifier.
+	 * Retrieve the role of this contributor.
 	 *
-	 * @return string The contents of <ProductIDType>.
+	 * @return string The contents of <ContributorRole>.
 	 */
 	public function getRole() {
 		return $this->role;
+	}
+
+	/**
+	 * Retrieve the SequenceNumber of this contributor.
+	 *
+	 * @return string The contents of <SequenceNumber>.
+	 */
+	public function getSequenceNumber()
+	{
+		// already found
+		if ($this->sequenceNumber) {
+			return $this->sequenceNumber();
+		}
+
+		if (isset($this->getValue()['SequenceNumber'])) {
+			return $this->sequenceNumber = $this->getValue()['SequenceNumber'];
+		}
+	}
+
+	/**
+	 * Retrieve the optional Corporate Name of this contributor.
+	 *
+	 * @return string The contents of <CorporateName>.
+	 */
+	public function getCorporateName()
+	{
+		// already found
+		if ($this->corporateName) {
+			return $this->corporateName();
+		}
+
+		if (isset($this->getValue()['CorporateName'])) {
+			return $this->corporateName = $this->getValue()['CorporateName'];
+		}
 	}
 
 	/**
@@ -110,4 +159,3 @@ class Contributor extends Subitem {
 	}
 
 }
-
