@@ -769,8 +769,15 @@ class Product {
 		// @TODO: 3.0 has more data such as `PublishingDateRole` that may need fleshed out
 		if( $this->version >= '3.0' )
 			return $this->get('PublishingDetail/PublishingDate/Date')[0]->nodeValue;
-		else
-			return $this->get('PublicationDate')[0]->nodeValue;
+		else {
+			$publicationDate = $this->get('PublicationDate');
+
+			if (count($publicationDate)) {
+				return $publicationDate[0]->nodeValue;
+			} else {
+				return null;
+			}
+		}
 	}
 
 	/**
