@@ -58,6 +58,7 @@ class SupplyDetail extends Subitem {
 	protected $product_availability = null; // preferred by ONIX 2.1
 
 	protected $on_sale_date = null;
+	protected $warehouse_location_name = null;
 
 	/**
 	 * The identifier’s value.
@@ -83,6 +84,10 @@ class SupplyDetail extends Subitem {
 			try{ $this->on_sale_date = $this->_getSingleChildElementText('SupplyDate/Date');} catch(\Exception $e) { }
 		}
 
+		try {
+			$this->warehouse_location_name = $this->_getSingleChildElementText('Stock/LocationName');
+		} catch (\Exception $e) { }
+ 
 		// Get the prices.
 		$this->prices = array();
 
@@ -160,6 +165,15 @@ class SupplyDetail extends Subitem {
 		return $this->prices;
 	}
 
+	/**
+	* Get Warehouse Location Name
+	*
+	* @return string
+	*/
+	public function getWarehouseLocationName()
+	{
+		return $this->warehouse_location_name;
+	}
 }
 
 ?>
