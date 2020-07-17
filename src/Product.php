@@ -490,12 +490,16 @@ class Product {
 			if ($this->version >= '3.0') {
 				// unknown implementation
 			} else {
-				$series = $this->get('Series')[0];
+				if (count($this->get('Series'))) {
+					$series = $this->get('Series')[0];
 
-				return [
-					'titleOfSeries' => $series->getTitleOfSeries(),
-					'numberWithinSeries' => $series->getNumberWithinSeries(),
-				];
+					return [
+						'titleOfSeries' => $series->getTitleOfSeries(),
+						'numberWithinSeries' => $series->getNumberWithinSeries(),
+					];
+				} else {
+					return null;
+				}
 			}
 		}
 	}
