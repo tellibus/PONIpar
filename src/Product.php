@@ -791,10 +791,17 @@ class Product {
 	*/
 	public function getFirstImprintName(){
 		// @TODO: many imprints can be set, we should support grabbing them all
-		if( $this->version >= '3.0' )
+		if ($this->version >= '3.0') {
 			return $this->get('PublishingDetail/Imprint/ImprintName')[0]->nodeValue;
-		else
-			return $this->get('Imprint/ImprintName')[0]->nodeValue;
+		} else {
+			$imprintName = $this->get('Imprint/ImprintName');
+
+			if (count($imprintName)) {
+				return $imprintName[0]->nodeValue;
+			} else {
+				return null;
+			}
+		}
 	}
 
 	/**
@@ -804,10 +811,17 @@ class Product {
 	*/
 	public function getFirstPublisherName(){
 		// @TODO: many publishers can be set, we should support grabbing them all
-		if( $this->version >= '3.0' )
+		if ($this->version >= '3.0') {
 			return $this->get('PublishingDetail/Publisher/PublisherName')[0]->nodeValue;
-		else
-			return $this->get('Publisher/PublisherName')[0]->nodeValue;
+		} else {
+			$publisherName = $this->get('Publisher/PublisherName');
+
+			if (count($publisherName)) {
+				return $publisherName[0]->nodeValue;
+			} else {
+				return null;
+			}
+		}
 	}
 
 	/**
